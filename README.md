@@ -6,7 +6,7 @@ Alpas docs search workflow for Alfred.
 
 ## Installation
 
-1. [Download the latest version](https://github.com/alpas/docs-alfred-workflow/releases/download/v1.0.0/AlpasDocs.alfredworkflow)
+1. [Download the latest AlpasDocs.alfredworkflow version](https://github.com/alpas/docs-alfred-workflow/releases/latest)
 2. Double-click the `.alfredworkflow` file to install it.
 3. Add the workflow to a category, then click `Import`.
 
