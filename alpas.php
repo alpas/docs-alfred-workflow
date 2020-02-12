@@ -12,27 +12,22 @@ $workflow = new Workflow;
 $parsedown = new Parsedown;
 $algolia = new Algolia('BH4D9OD16A', 'e017bb0b99fe3193f750d48a4e7d441e');
 
-AlgoliaUserAgent::addSuffixUserAgentSegment('Alpas Docs Alfred Workflow', '1.0.0');
+AlgoliaUserAgent::addSuffixUserAgentSegment('Alpas Docs Alfred Workflow', '1.0.1');
 
 $index = $algolia->initIndex('alpas');
 $search = $index->search($query);
 $results = $search['hits'];
 
-$subtextSupported = $subtext === '0' || $subtext === '2';
-
 if (empty($results)) {
-    if (empty($results)) {
-        $workflow->result()
-                 ->title('No matches')
-                 ->icon('google.png')
-                 ->subtitle("No match found in the docs. Search Google for: \"Alpas+{$query}\"")
-                 ->arg("https://www.google.com/search?q=alpas+{$query}")
-                 ->quicklookurl("https://www.google.com/search?q=alpas+{$query}")
-                 ->valid(true);
+    $workflow->result()
+             ->title('No matches')
+             ->icon('google.png')
+             ->subtitle("No match found in the docs. Search Google for: \"Alpas+{$query}\"")
+             ->arg("https://www.google.com/search?q=alpas+{$query}")
+             ->quicklookurl("https://www.google.com/search?q=alpas+{$query}")
+             ->valid(true);
 
-        echo $workflow->output();
-        exit;
-    }
+    echo $workflow->output();
     exit;
 }
 
@@ -47,7 +42,10 @@ foreach ($results as $hit) {
     $subtitle = $hit['hierarchy']['lvl0'];
     while ($currentLvl < $highestLvl) {
         $currentLvl = $currentLvl + 1;
-        $subtitle = $subtitle.' » '.$hit['hierarchy']['lvl'.$currentLvl];
+        $lvl = $hit['hierarchy']['lvl'.$currentLvl];
+        if (!empty($lvl)) {
+            $subtitle = $subtitle.' ⇝ '.$lvl;
+        }
     }
 
     $workflow->result()

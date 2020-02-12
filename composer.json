@@ -1,7 +1,7 @@
 {
     "name": "alpas/docsalfred",
     "description": "Alpas docs search workflow for Alfred.",
-    "version": "1.1.0",
+    "version": "1.0.1",
     "keywords": ["alfred", "alfred-workflow", "alpas", "algolia"],
     "homepage": "https://github.com/alpas",
     "support": {
